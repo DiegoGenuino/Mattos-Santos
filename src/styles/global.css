@@ -28,18 +28,18 @@
 }
 
 :root {
-  --ink: #15171c;
-  --muted: #686d78;
-  --line: #dcdfe5;
-  --surface: #f2f3f5;
-  --paper: #fbfbfa;
-  --blue: #0025b1;
-  --blue-dark: #244ee8;
+  --ink: #243247;
+  --muted: #697789;
+  --line: #e0e5eb;
+  --surface: #f4f6f8;
+  --paper: #fffdf9;
+  --blue: #304866;
+  --blue-dark: #203852;
   --white: #ffffff;
   --container: 1240px;
   --header-h: 64px;
   --radius: 8px;
-  --shadow: 0 20px 70px rgba(14, 20, 38, 0.12);
+  --shadow: 0 20px 70px rgba(44, 62, 82, 0.12);
   --font-hero: 48px;
   --font-section-title: 36px;
   --font-card-title: 32px;
@@ -97,7 +97,7 @@ h3 {
   background: var(--blue);
 }
 :focus-visible {
-  outline: 3px solid #85a3ff;
+  outline: 3px solid #c59d5f;
   outline-offset: 4px;
 }
 
@@ -181,11 +181,11 @@ h3 {
   padding: 0 22px;
   color: white;
   background: var(--blue);
-  box-shadow: 0 12px 32px rgba(49, 92, 255, 0.28);
+  box-shadow: 0 12px 32px rgba(30, 41, 59, 0.28);
 }
 .button-primary:hover {
   background: var(--blue-dark);
-  box-shadow: 0 16px 38px rgba(49, 92, 255, 0.36);
+  box-shadow: 0 16px 38px rgba(15, 23, 42, 0.36);
 }
 .button svg {
   width: 19px;
@@ -248,19 +248,19 @@ svg.cta-arrow-icon {
   align-items: center;
   margin: auto;
   padding: 0 18px 0 24px;
-  color: white;
+  color: var(--ink);
   background: linear-gradient(
     135deg,
-    rgba(15, 16, 20, 0.58),
-    rgba(15, 16, 20, 0.42)
+    rgba(255, 255, 255, 0.88),
+    rgba(255, 255, 255, 0.72)
   );
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 5px;
   -webkit-backdrop-filter: blur(26px) saturate(150%);
   backdrop-filter: blur(26px) saturate(150%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 12px 38px rgba(0, 0, 0, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 12px 38px rgba(44, 62, 82, 0.13);
 }
 .site-header.is-scrolled {
   top: 8px;
@@ -268,10 +268,10 @@ svg.cta-arrow-icon {
 .site-header.is-scrolled .nav-shell {
   background: linear-gradient(
     135deg,
-    rgba(15, 16, 20, 0.7),
-    rgba(15, 16, 20, 0.56)
+    rgba(255, 255, 255, 0.94),
+    rgba(255, 255, 255, 0.82)
   );
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(48, 72, 102, 0.16);
   -webkit-backdrop-filter: blur(30px) saturate(155%);
   backdrop-filter: blur(30px) saturate(155%);
 }
@@ -282,7 +282,7 @@ svg.cta-arrow-icon {
   text-transform: uppercase;
 }
 .brand-logo {
-  width: 165px;
+  width: 190px;
   height: auto;
 }
 .brand-name {
@@ -297,7 +297,7 @@ svg.cta-arrow-icon {
 }
 .desktop-nav a {
   position: relative;
-  color: #c9cbd0;
+  color: #5e6d7f;
   font-size: var(--font-label);
   transition: color 0.2s ease;
 }
@@ -313,7 +313,7 @@ svg.cta-arrow-icon {
   transition: transform 0.2s ease;
 }
 .desktop-nav a:hover {
-  color: white;
+  color: var(--blue-dark);
 }
 .desktop-nav a:hover::after {
   transform: scaleX(1);
@@ -348,7 +348,7 @@ svg.cta-arrow-icon {
   min-height: 760px;
   overflow: hidden;
   color: white;
-  background: #14171d;
+  background: #c9d3dc;
 }
 .hero-media,
 .hero-media::after {
@@ -369,12 +369,12 @@ svg.cta-arrow-icon {
   background:
     linear-gradient(
       90deg,
-      rgba(7, 10, 16, 0.92) 0%,
-      rgba(7, 10, 16, 0.78) 31%,
-      rgba(7, 10, 16, 0.18) 67%,
-      rgba(7, 10, 16, 0.3) 100%
+      rgba(27, 45, 64, 0.55) 0%,
+      rgba(27, 45, 64, 0.38) 31%,
+      rgba(27, 45, 64, 0.08) 67%,
+      rgba(27, 45, 64, 0.16) 100%
     ),
-    linear-gradient(0deg, rgba(5, 8, 12, 0.35), transparent 40%);
+    linear-gradient(0deg, rgba(27, 45, 64, 0.18), transparent 40%);
   content: "";
 }
 .hero-inner {
@@ -588,9 +588,10 @@ svg.cta-arrow-icon {
 }
 .profile-card img {
   width: 100%;
-  aspect-ratio: 392 / 505;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
 }
 .profile-card picture {
   display: block;
@@ -1238,8 +1239,8 @@ svg.cta-arrow-icon {
 }
 
 .faq {
-  color: white;
-  background: #17191e;
+  color: var(--ink);
+  background: #f5f7f8;
 }
 .faq-grid {
   display: grid;
@@ -1250,20 +1251,20 @@ svg.cta-arrow-icon {
   margin: 16px 0 24px;
 }
 .faq-intro > p:not(.section-kicker) {
-  color: #aeb1ba;
+  color: var(--muted);
   font-size: var(--font-body-small);
 }
 .faq .arrow-link {
   margin-top: 18px;
-  color: white;
-  border-color: #747780;
+  color: var(--blue);
+  border-color: #b9c3ce;
 }
 .faq-list details {
-  border-top: 1px solid #34373f;
+  border-top: 1px solid #dbe2e8;
   transition: background-color 0.42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .faq-list details:last-child {
-  border-bottom: 1px solid #34373f;
+  border-bottom: 1px solid #dbe2e8;
 }
 .faq-list summary {
   display: flex;
@@ -1285,7 +1286,7 @@ svg.cta-arrow-icon {
   flex: 0 0 auto;
   width: 24px;
   height: 24px;
-  border: 1px solid #555962;
+  border: 1px solid #304866;
   border-radius: 50%;
   transition:
     background-color 0.42s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1299,7 +1300,7 @@ svg.cta-arrow-icon {
   left: 50%;
   width: 9px;
   height: 1px;
-  background: white;
+  background: #304866;
   content: "";
   transform: translate(-50%, -50%);
   transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1308,7 +1309,7 @@ svg.cta-arrow-icon {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 .faq-list details[open] summary {
-  color: #9eb4ff;
+  color: #304866;
 }
 .faq-list details[open] summary i {
   background: var(--blue);
@@ -1329,7 +1330,7 @@ svg.cta-arrow-icon {
 .faq-answer p {
   max-width: 610px;
   margin: -6px 50px 26px 0;
-  color: #aeb1ba;
+  color: #5e6d7f;
   font-size: var(--font-body-small);
   line-height: 1.7;
 }
@@ -1426,8 +1427,8 @@ svg.cta-arrow-icon {
 }
 
 .footer {
-  color: white;
-  background: #0e1014;
+  color: var(--ink);
+  background: #eef2f5;
 }
 .footer-cta {
   display: flex;
@@ -1436,7 +1437,7 @@ svg.cta-arrow-icon {
   gap: 48px;
   padding-top: 100px;
   padding-bottom: 90px;
-  border-bottom: 1px solid #292c33;
+  border-bottom: 1px solid #d6dee6;
 }
 .footer-cta h2 {
   margin: 12px 0 0;
@@ -1461,7 +1462,7 @@ svg.cta-arrow-icon {
   letter-spacing: 0.12em;
 }
 .footer-main > p {
-  color: #858a94;
+  color: #667588;
   font-size: var(--font-body-small);
 }
 .footer-links {
@@ -1479,8 +1480,8 @@ svg.cta-arrow-icon {
   gap: 20px;
   padding-top: 24px;
   padding-bottom: 30px;
-  color: #8b909a;
-  border-top: 1px solid #292c33;
+  color: #6b7989;
+  border-top: 1px solid #d6dee6;
   font-size: var(--font-caption);
 }
 .footer-bottom a {
