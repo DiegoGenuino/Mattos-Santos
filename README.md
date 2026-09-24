@@ -5,7 +5,6 @@ Site institucional da Mattos & Santos — Assessoria Previdenciária.
 ## Dados institucionais
 
 - Atuação: Direito Previdenciário, Direito Trabalhista e Direito Civil
-- Registro: OAB/SP 205.542
 - WhatsApp: (11) 93948-2042 e (11) 95193-3580
 - E-mail: mattosesantosassessoria@gmail.com
 - Endereço: Rua São Paulo, 526, loja 06 — Liberdade, São Paulo/SP

@@ -25,7 +25,6 @@ export interface IdentityConfig {
   professionalDescription: string;
   professionalImage: string;
   logo: ImageAsset;
-  registration: string;
 }
 
 export interface ContactConfig {
@@ -80,7 +79,6 @@ export interface AboutConfig {
     sizes: string;
   };
   cardName: string;
-  cardDetail: string;
   eyebrow: string;
   credentials: Array<{ icon: string; text: string }>;
 }
@@ -323,7 +321,6 @@ export const siteConfig = {
       height: 33,
       alt: 'Mattos & Santos — Assessoria Previdenciária',
     },
-    registration: 'OAB/SP 205.542',
   },
   contact: {
     whatsappUrl: 'https://wa.me/5511939482042',
@@ -393,7 +390,6 @@ export const siteConfig = {
       { value: '+20 anos', label: 'de atuação previdenciária' },
       { value: '24h', label: 'para enviar sua mensagem' },
       { value: 'Digital', label: 'e também presencial' },
-      { value: 'OAB/SP', label: '205.542' },
     ],
   },
   about: {
@@ -411,7 +407,6 @@ export const siteConfig = {
       sizes: '(max-width: 780px) calc(100vw - 34px), 392px',
     },
     cardName: 'Especialista responsável',
-    cardDetail: 'OAB/SP 205.542',
     eyebrow: 'Mais de 20 anos de atuação',
     credentials: [
       { icon: 'lucide:circle-check', text: 'Pós-graduação em Direito Previdenciário' },

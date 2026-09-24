@@ -36,7 +36,6 @@ const resolveNavigationHref = (href: string) => href.startsWith('#') && !isHome 
   </div>
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} {identity.siteName}. {footer.copyrightSuffix}</span>
-    <span>{identity.registration}</span>
     <a href={resolveNavigationHref(footer.backToTopHref)}>{footer.backToTopLabel} <Icon name="lucide:arrow-up" aria-hidden="true" /></a>
   </div>
 </footer>

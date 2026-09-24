@@ -28,7 +28,6 @@ const aboutSrcset = about.image.srcset.map(({ src, width }) => `${src} ${width}w
       </picture>
       <figcaption>
         <span>{about.cardName}</span>
-        <small>{about.cardDetail}</small>
       </figcaption>
     </figure>
 
@@ -36,7 +35,7 @@ const aboutSrcset = about.image.srcset.map(({ src, width }) => `${src} ${width}w
       <p class="section-kicker">{about.eyebrow}</p>
       <header class="professional-heading">
         <h2>{identity.professionalName || 'A experiência por trás de cada orientação.'}</h2>
-        <p>{identity.professionalRole} <span aria-hidden="true">·</span> {identity.registration}</p>
+        <p>{identity.professionalRole}</p>
       </header>
       <p class="about-bio" data-scroll-text>
         <span class="sr-only">{bioText}</span>

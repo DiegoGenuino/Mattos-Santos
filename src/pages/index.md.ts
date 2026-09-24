@@ -34,7 +34,7 @@ A ${identity.legalName} atua em ${seo.areaServed}, com atendimento técnico, pes
 
 ## Sobre a especialista
 
-**Atuação:** ${identity.professionalRole}. **Registro:** ${identity.registration}.
+**Atuação:** ${identity.professionalRole}.
 
 ${identity.professionalDescription}
 
