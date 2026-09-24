@@ -306,7 +306,7 @@ export interface SiteConfig {
 }
 
 const runtimeEnv = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env;
-const configuredSiteUrl = runtimeEnv?.PUBLIC_SITE_URL?.trim().replace(/\/$/, '') || 'https://mattosesantos.feito.website';
+const configuredSiteUrl = runtimeEnv?.PUBLIC_SITE_URL?.trim().replace(/\/$/, '') || 'https://mattossantosassesoria.feito.website';
 const configuredContactEmail = runtimeEnv?.PUBLIC_CONTACT_EMAIL?.trim() || 'mattosesantosassessoria@gmail.com';
 
 export const siteConfig = {
@@ -644,8 +644,8 @@ export const siteConfig = {
     lastUpdated: '24 de setembro de 2026',
   },
   deployment: {
-    projectName: 'mattosesantos-advocacia',
-    subdomain: 'mattosesantos',
+    projectName: 'mattos-santos-assesoria',
+    subdomain: 'mattossantosassesoria',
     baseDomain: 'feito.website',
     // Pode ser sobrescrito pela variável VERCEL_CNAME_TARGET.
     cnameTarget: 'cname.vercel-dns-0.com',
