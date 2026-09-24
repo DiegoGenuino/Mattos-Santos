@@ -4,7 +4,7 @@ import { siteConfig } from '@/config/site';
 export const prerender = true;
 
 export const GET: APIRoute = () => {
-  const { aiDiscovery, faqSection, identity, locationSection, seo } = siteConfig;
+  const { aiDiscovery, contact, faqSection, identity, locationSection, processSection, seo, servicePages } = siteConfig;
 
   if (!aiDiscovery.enabled) {
     return new Response('Not found', { status: 404 });
@@ -15,6 +15,12 @@ export const GET: APIRoute = () => {
   const faqs = faqSection.items
     .map(({ question, answer }) => `### ${question}\n\n${answer}`)
     .join('\n\n');
+  const serviceLinks = servicePages
+    .map(({ eyebrow, slug, summary }) => `- [${eyebrow}](${siteUrl}/atuacao/${slug}/): ${summary}`)
+    .join('\n');
+  const processSteps = processSection.steps
+    .map(({ title, description }, index) => `${index + 1}. **${title}:** ${description}`)
+    .join('\n');
 
   const body = `# ${identity.siteName}
 
@@ -26,11 +32,9 @@ ${seo.defaultDescription}
 
 A ${identity.legalName} atua em ${seo.areaServed}, com atendimento técnico, pessoal e sigiloso. ${aiDiscovery.usageNote}
 
-## Profissional responsável
+## Sobre a especialista
 
-### ${identity.professionalName}
-
-**Atuação:** ${identity.professionalRole}.
+**Atuação:** ${identity.professionalRole}. **Registro:** ${identity.registration}.
 
 ${identity.professionalDescription}
 
@@ -38,9 +42,17 @@ ${identity.professionalDescription}
 
 ${areas}
 
+### Páginas de atendimento
+
+${serviceLinks}
+
+## Como funciona
+
+${processSteps}
+
 ## Atendimento
 
-O atendimento pode ocorrer presencialmente ou de forma remota, conforme a necessidade do caso. Conversas, documentos e informações são tratados sob sigilo profissional. O primeiro contato é destinado a compreender o contexto, identificar urgências e orientar os próximos passos.
+O atendimento pode ocorrer presencialmente ou de forma 100% digital, e mensagens podem ser enviadas pelo WhatsApp 24 horas. O retorno é organizado conforme a disponibilidade do atendimento. WhatsApp: ${contact.whatsappNumbers.map(({ label }) => label).join(' ou ')}. E-mail: ${contact.email}. Conversas, documentos e informações são tratados sob sigilo profissional.
 
 ## Localização
 

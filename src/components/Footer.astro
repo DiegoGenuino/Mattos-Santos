@@ -6,49 +6,112 @@ import { siteConfig } from '@/config/site';
 const { contact, footer, identity } = siteConfig;
 const { logo } = identity;
 const { whatsapp } = footer;
+const isHome = Astro.url.pathname === '/';
+const resolveNavigationHref = (href: string) => href.startsWith('#') && !isHome ? `/${href}` : href;
 ---
 
-<footer class="footer">
+<footer class="footer" id="contato">
   <div class="container footer-cta" data-reveal>
     <div>
-      <p class="section-kicker spotlight-text">{footer.eyebrow}</p>
-      <h2 class="spotlight-text">{footer.title}<br /><span>{footer.highlightedTitle}</span></h2>
+      <p class="section-kicker">{footer.eyebrow}</p>
+      <h2>{footer.title}<br aria-hidden="true" /> <span>{footer.highlightedTitle}</span></h2>
     </div>
-    <a class="button button-primary button-large" href={contact.whatsappUrl} target="_blank" rel="noreferrer"><WhatsAppIcon /> {contact.primaryCtaLabel}</a>
+    <a class="button button-primary button-large" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher><WhatsAppIcon /> {contact.primaryCtaLabel}</a>
   </div>
   <div class="container footer-main">
     <div class="footer-brand">
       <img class="brand-logo" src={logo.src} width={logo.width} height={logo.height} alt={logo.alt} />
+      <div class="footer-contact" aria-label="Canais de contato">
+        {contact.whatsappNumbers.map(({ label, url }) => (
+          <a href={url} target="_blank" rel="noreferrer">WhatsApp {label}</a>
+        ))}
+        <a href={contact.emailUrl}>{contact.email}</a>
+      </div>
     </div>
-    <p class="spotlight-text">{footer.description}</p>
+    <p>{footer.description}</p>
     <div class="footer-links">
-      {footer.links.map((link) => <a href={link.href}>{link.label}</a>)}
+      {footer.links.map((link) => <a href={resolveNavigationHref(link.href)}>{link.label}</a>)}
+      <a href="/politica-de-privacidade/">Privacidade</a>
     </div>
   </div>
   <div class="container footer-bottom">
     <span>© {new Date().getFullYear()} {identity.siteName}. {footer.copyrightSuffix}</span>
     <span>{identity.registration}</span>
-    <a href={footer.backToTopHref}>{footer.backToTopLabel} <Icon name="lucide:arrow-up" aria-hidden="true" /></a>
+    <a href={resolveNavigationHref(footer.backToTopHref)}>{footer.backToTopLabel} <Icon name="lucide:arrow-up" aria-hidden="true" /></a>
   </div>
 </footer>
 
 <aside class="whatsapp-contact" data-whatsapp-contact aria-label={whatsapp.regionLabel}>
-  <div class="whatsapp-invite" id="whatsapp-menu" data-whatsapp-invite>
+  <button
+    class="floating-whatsapp"
+    type="button"
+    aria-label={whatsapp.buttonLabel}
+    aria-expanded="false"
+    aria-controls="whatsapp-menu"
+    data-open-label={whatsapp.buttonLabel}
+    data-close-label={whatsapp.closeLabel}
+  >
+    <WhatsAppIcon />
+  </button>
+
+  <section
+    class="whatsapp-invite"
+    id="whatsapp-menu"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="whatsapp-sender"
+    aria-describedby="whatsapp-message"
+    aria-hidden="true"
+    data-whatsapp-invite
+    inert
+  >
     <button class="whatsapp-invite-close" type="button" aria-label={whatsapp.closeLabel} data-whatsapp-close>
       <Icon name="lucide:x" aria-hidden="true" />
     </button>
-    <img src={whatsapp.image.src} width={whatsapp.image.width} height={whatsapp.image.height} alt={whatsapp.image.alt} loading="lazy" decoding="async" />
-    <div>
-      <strong>{whatsapp.senderName}</strong>
+    <div class="whatsapp-agent">
+      <span class="whatsapp-agent-photo">
+        <img src={whatsapp.image.src} width={whatsapp.image.width} height={whatsapp.image.height} alt={whatsapp.image.alt} loading="lazy" decoding="async" />
+        <i aria-hidden="true"></i>
+      </span>
+      <div>
+        <strong id="whatsapp-sender">{whatsapp.senderName}</strong>
+        <span>Mensagens recebidas 24 horas</span>
+      </div>
+    </div>
+    <div class="whatsapp-message" id="whatsapp-message">
       <p>{whatsapp.message}</p>
     </div>
-    <a class="whatsapp-invite-action" href={contact.whatsappUrl} target="_blank" rel="noreferrer">
-      <WhatsAppIcon />
-      {whatsapp.actionLabel}
-    </a>
-  </div>
-
-  <button class="floating-whatsapp" type="button" aria-label={whatsapp.buttonLabel} aria-expanded="false" aria-controls="whatsapp-menu">
-    <WhatsAppIcon />
-  </button>
+    <fieldset class="whatsapp-topic-group">
+      <legend>{whatsapp.topicLabel}</legend>
+      <div class="whatsapp-topics">
+        {whatsapp.topics.map((topic) => (
+          <button type="button" aria-pressed="false" data-whatsapp-topic={topic}>{topic}</button>
+        ))}
+      </div>
+    </fieldset>
+    <p class="whatsapp-choices-label">{whatsapp.choicesLabel}</p>
+    <div class="whatsapp-channels" aria-label={whatsapp.choicesLabel}>
+      {contact.whatsappNumbers.map(({ label, url, channelName, defaultMessage }, index) => (
+        <a
+          class="whatsapp-channel"
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Conversar pelo WhatsApp no número ${label}`}
+          data-whatsapp-channel
+          data-base-url={url}
+          data-default-message={defaultMessage}
+          style={`--channel-index: ${index}`}
+        >
+          <span class="whatsapp-channel-icon" aria-hidden="true"><WhatsAppIcon /></span>
+          <span>
+            <small>{whatsapp.channelLabel} · {channelName}</small>
+            <strong>{label}</strong>
+          </span>
+          <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+        </a>
+      ))}
+    </div>
+    <p class="whatsapp-redirect-note"><Icon name="lucide:shield-check" aria-hidden="true" /> {whatsapp.redirectNote}</p>
+  </section>
 </aside>

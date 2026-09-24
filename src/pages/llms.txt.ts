@@ -24,8 +24,8 @@ Idioma principal: português do Brasil. Área de atendimento: ${seo.areaServed}.
 ## Navegação
 
 - [Site oficial](${siteUrl}/): Página institucional completa da ${identity.siteName}.
-- [Áreas de atuação](${siteUrl}/#especialidades): Direito Previdenciário, benefícios do INSS, Direito Civil e demandas relacionadas.
-- [Sobre o profissional](${siteUrl}/#sobre): Experiência e apresentação de ${identity.professionalName}.
+- [Áreas de atuação](${siteUrl}/#especialidades): Direito Previdenciário, Direito Trabalhista e Direito Civil.
+- [Sobre a especialista](${siteUrl}/#sobre): Mais de 20 anos de atuação e pós-graduação em Direito Previdenciário.
 - [Dúvidas frequentes](${siteUrl}/#faq): Respostas institucionais sobre atendimento e sigilo.
 - [Localização](${siteUrl}/#localizacao): Região de atendimento presencial e acesso ao mapa.
 

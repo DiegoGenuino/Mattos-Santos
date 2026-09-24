@@ -30,8 +30,8 @@ const embedUrl = provider === 'youtube' && normalizedVideoId
   <div class="container video-section-grid">
     <div class="video-section-copy" data-reveal>
       <p class="section-kicker">{eyebrow}</p>
-      <h2 class="spotlight-text" id="video-section-title">{title}<br /><span>{highlightedTitle}</span></h2>
-      <p class="spotlight-text">{description}</p>
+      <h2 id="video-section-title">{title}<br aria-hidden="true" /> <span>{highlightedTitle}</span></h2>
+      <p>{description}</p>
     </div>
 
     <div class="video-frame" data-reveal>

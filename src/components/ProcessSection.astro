@@ -1,0 +1,28 @@
+---
+import { siteConfig } from '@/config/site';
+
+const { contact, processSection: section } = siteConfig;
+---
+
+<section class="section process-section" id={section.id} aria-labelledby="process-title">
+  <div class="container process-shell">
+    <header class="process-heading" data-reveal>
+      <h2 id="process-title">{section.title}<br aria-hidden="true" /> <span>{section.highlightedTitle}</span></h2>
+      <div>
+        <p>{section.description}</p>
+        <a class="arrow-link" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>
+          {section.ctaLabel}
+        </a>
+      </div>
+    </header>
+
+    <ol class="process-steps" data-reveal>
+      {section.steps.map((step) => (
+        <li>
+          <h3>{step.title}</h3>
+          <p class="process-description">{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

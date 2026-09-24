@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import SEO from '@/components/SEO.astro';
+import SiteInteractions from '@/components/SiteInteractions.astro';
 import { siteConfig } from '@/config/site';
 import type { Props as SEOProps } from '@/components/SEO.astro';
 
@@ -9,6 +10,7 @@ interface Props extends SEOProps {}
 const seoProps = Astro.props;
 const heroImage = siteConfig.hero.image;
 const heroSrcset = heroImage.srcset.map(({ src, width }) => `${src} ${width}w`).join(', ');
+const shouldPreloadHero = Astro.url.pathname === '/';
 ---
 
 <!doctype html>
@@ -27,17 +29,20 @@ const heroSrcset = heroImage.srcset.map(({ src, width }) => `${src} ${width}w`).
     <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-500.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      as="image"
-      href={heroImage.src}
-      imagesrcset={heroSrcset}
-      imagesizes={heroImage.sizes}
-      type="image/webp"
-      fetchpriority="high"
-    />
+    {shouldPreloadHero && (
+      <link
+        rel="preload"
+        as="image"
+        href={heroImage.src}
+        imagesrcset={heroSrcset}
+        imagesizes={heroImage.sizes}
+        type="image/webp"
+        fetchpriority="high"
+      />
+    )}
   </head>
   <body>
     <slot />
+    <SiteInteractions />
   </body>
 </html>

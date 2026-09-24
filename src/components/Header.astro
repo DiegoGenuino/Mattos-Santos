@@ -4,30 +4,41 @@ import { siteConfig } from '@/config/site';
 
 const { contact, header, identity } = siteConfig;
 const { logo } = identity;
+const isHome = Astro.url.pathname === '/';
+const resolveNavigationHref = (href: string) => href.startsWith('#') && !isHome ? `/${href}` : href;
 ---
 
 <header class="site-header" data-header>
   <div class="nav-shell">
-    <a class="brand" href={header.brandHref} aria-label={header.brandLabel}>
+    <a class="brand" href={resolveNavigationHref(header.brandHref)} aria-label={header.brandLabel}>
       <img class="brand-logo" src={logo.src} width={logo.width} height={logo.height} alt="" />
     </a>
 
     <nav class="desktop-nav" aria-label={header.primaryNavigationLabel}>
-      {header.links.map((link) => <a href={link.href}>{link.label}</a>)}
+      {header.links.map((link) => <a href={resolveNavigationHref(link.href)} data-nav-link={isHome ? link.href.slice(1) : undefined}>{link.label}</a>)}
     </nav>
 
-    <a class="nav-cta" href={contact.whatsappUrl} target="_blank" rel="noreferrer">
+    <a class="nav-cta" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>
       {contact.primaryCtaLabel}
       <span aria-hidden="true"><ArrowUpRightIcon /></span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-label={header.menuOpenLabel} aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label={header.menuOpenLabel}
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+      data-open-label={header.menuOpenLabel}
+      data-close-label="Fechar menu"
+    >
       <span></span><span></span>
     </button>
   </div>
 
-  <nav class="mobile-nav" id="mobile-menu" aria-label={header.mobileNavigationLabel} data-mobile-menu>
-    {header.links.map((link) => <a href={link.href}>{link.label}</a>)}
-    <a class="button button-primary" href={contact.whatsappUrl} target="_blank" rel="noreferrer">{contact.primaryCtaLabel} <ArrowUpRightIcon /></a>
+  <nav class="mobile-nav" id="mobile-menu" aria-label={header.mobileNavigationLabel} data-mobile-menu inert>
+    {header.links.map((link) => <a href={resolveNavigationHref(link.href)} data-nav-link={isHome ? link.href.slice(1) : undefined}>{link.label}</a>)}
+    <a class="button button-primary" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>{contact.primaryCtaLabel} <ArrowUpRightIcon /></a>
   </nav>
 </header>

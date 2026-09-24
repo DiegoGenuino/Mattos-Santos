@@ -9,11 +9,12 @@ const { items: reviews, hasGoogleReviews } = await resolveReviews(section, {
 });
 ---
 
+{reviews.length > 0 && (
 <section class="section reviews" id={section.id} aria-labelledby="reviews-title">
   <div class="container reviews-shell">
     <header class="reviews-heading" data-reveal>
       <img src={platformLogo.src} width={platformLogo.width} height={platformLogo.height} alt={platformLogo.alt} loading="lazy" decoding="async" />
-      <h2 class="spotlight-text" id="reviews-title">{section.title} <span>{section.highlightedTitle}</span></h2>
+      <h2 id="reviews-title">{section.title} <span>{section.highlightedTitle}</span></h2>
     </header>
 
     <div class="reviews-grid">
@@ -75,3 +76,4 @@ const { items: reviews, hasGoogleReviews } = await resolveReviews(section, {
     {hasGoogleReviews && <p class="reviews-source-note"><span translate="no">Google Maps</span> · {section.orderingNotice}</p>}
   </div>
 </section>
+)}

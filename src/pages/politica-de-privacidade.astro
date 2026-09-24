@@ -1,0 +1,56 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { siteConfig } from '@/config/site';
+
+const { contact, identity, privacy } = siteConfig;
+---
+
+<BaseLayout title={privacy.title} description={privacy.description}>
+  <Header />
+  <main class="policy-page">
+    <header class="policy-hero">
+      <div class="container policy-header">
+        <a class="policy-home-link" href="/"><span aria-hidden="true">←</span> Voltar ao site Mattos & Santos</a>
+        <h1>{privacy.title}</h1>
+        <p>{privacy.description}</p>
+        <small>Atualizado em {privacy.lastUpdated}</small>
+      </div>
+    </header>
+
+    <article class="container policy-content">
+      <section>
+        <h2>O que acontece ao navegar</h2>
+        <p>Este site não possui formulário próprio de cadastro e não solicita documentos durante a navegação. Informações pessoais são fornecidas somente quando você decide entrar em contato por WhatsApp ou e-mail.</p>
+      </section>
+
+      <section>
+        <h2>Canais externos</h2>
+        <p>Os botões de WhatsApp e os links de e-mail direcionam para serviços externos. Ao utilizá-los, o tratamento das informações também fica sujeito aos termos e às políticas desses serviços.</p>
+      </section>
+
+      <section>
+        <h2>Mapa e conteúdo de terceiros</h2>
+        <p>A página inicial incorpora um mapa do Google para facilitar a localização do atendimento presencial. Esse conteúdo pode receber informações técnicas do navegador, como endereço IP e características do dispositivo, conforme as regras do provedor.</p>
+      </section>
+
+      <section>
+        <h2>Uso das informações de contato</h2>
+        <p>As informações enviadas voluntariamente pelos canais de atendimento são utilizadas para responder à solicitação, organizar o atendimento e dar continuidade à comunicação iniciada por você.</p>
+      </section>
+
+      <section>
+        <h2>Seus pedidos e dúvidas</h2>
+        <p>Para perguntar sobre privacidade ou solicitar informações relacionadas aos dados enviados diretamente ao escritório, escreva para <a href={contact.emailUrl}>{contact.email}</a>.</p>
+      </section>
+
+      <aside class="policy-note">
+        <strong>{identity.legalName}</strong>
+        <p>Este aviso descreve o funcionamento atual do site e deve ser revisto sempre que novos formulários, ferramentas de análise ou integrações forem adicionados.</p>
+      </aside>
+      <p class="policy-reference">Referência pública: <a href="https://www.gov.br/anpd/pt-br/acesso-a-informacao/aviso-de-privacidade" target="_blank" rel="noreferrer">Aviso de Privacidade da Autoridade Nacional de Proteção de Dados</a>.</p>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>

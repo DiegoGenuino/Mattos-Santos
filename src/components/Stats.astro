@@ -8,8 +8,8 @@ const { stats } = siteConfig;
   <div class="container stats-grid">
     {stats.items.map(({ value, label }) => (
       <article class="stat" data-reveal>
-        <strong class="spotlight-text">{value}</strong>
-        <span class="spotlight-text">{label}</span>
+        <strong>{value}</strong>
+        <span>{label}</span>
       </article>
     ))}
   </div>

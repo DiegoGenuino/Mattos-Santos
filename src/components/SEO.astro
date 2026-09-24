@@ -26,10 +26,18 @@ const {
 
 const seo = siteConfig.seo;
 const identity = siteConfig.identity;
+const contact = siteConfig.contact;
+const location = siteConfig.locationSection;
 const aiDiscovery = siteConfig.aiDiscovery;
 const resolvedTitle = title ? seo.titleTemplate.replace('%s', title) : seo.defaultTitle;
 const canonicalUrl = new URL(canonical || Astro.url.pathname, seo.siteUrl).toString();
 const imageUrl = new URL(image, seo.siteUrl).toString();
+const imagePath = new URL(imageUrl).pathname.toLowerCase();
+const imageType = imagePath.endsWith('.png')
+  ? 'image/png'
+  : imagePath.endsWith('.jpg') || imagePath.endsWith('.jpeg')
+    ? 'image/jpeg'
+    : 'image/webp';
 const logoUrl = new URL(identity.logo.src, seo.siteUrl).toString();
 const professionalImageUrl = new URL(identity.professionalImage, seo.siteUrl).toString();
 const llmsUrl = new URL(aiDiscovery.llmsPath, seo.siteUrl).toString();
@@ -58,17 +66,16 @@ const structuredData: Record<string, unknown>[] = [
     description,
     areaServed: seo.areaServed,
     knowsAbout: seo.knowsAbout,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    '@id': `${seo.siteUrl}/#professional`,
-    name: identity.professionalName,
-    jobTitle: identity.professionalRole,
-    description: identity.professionalDescription,
-    image: professionalImageUrl,
-    worksFor: { '@id': `${seo.siteUrl}/#legal-service` },
-    knowsAbout: seo.knowsAbout,
+    identifier: identity.registration,
+    telephone: contact.whatsappNumbers.map(({ label }) => label),
+    email: contact.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: location.address,
+      addressLocality: 'São Paulo',
+      addressRegion: 'SP',
+      addressCountry: 'BR',
+    },
   },
   {
     '@context': 'https://schema.org',
@@ -80,9 +87,23 @@ const structuredData: Record<string, unknown>[] = [
     inLanguage: seo.language,
     isPartOf: { '@id': `${seo.siteUrl}/#website` },
     about: { '@id': `${seo.siteUrl}/#legal-service` },
-    mainEntity: { '@id': `${seo.siteUrl}/#professional` },
+    mainEntity: { '@id': `${seo.siteUrl}/#legal-service` },
   },
 ];
+
+if (identity.professionalName) {
+  structuredData.splice(2, 0, {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${seo.siteUrl}/#professional`,
+    name: identity.professionalName,
+    jobTitle: identity.professionalRole,
+    description: identity.professionalDescription,
+    image: professionalImageUrl,
+    worksFor: { '@id': `${seo.siteUrl}/#legal-service` },
+    knowsAbout: seo.knowsAbout,
+  });
+}
 
 if (faqItems.length) {
   structuredData.push({
@@ -119,7 +140,7 @@ const serializedStructuredData = JSON.stringify(structuredData).replace(/</g, '\
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:secure_url" content={imageUrl} />
-<meta property="og:image:type" content="image/webp" />
+<meta property="og:image:type" content={imageType} />
 <meta property="og:image:width" content={String(seo.defaultImageWidth)} />
 <meta property="og:image:height" content={String(seo.defaultImageHeight)} />
 <meta property="og:image:alt" content={imageAlt} />

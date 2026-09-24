@@ -29,13 +29,12 @@ const heroSrcset = hero.image.srcset.map(({ src, width }) => `${src} ${width}w`)
   <div class="container hero-inner">
     <div class="hero-copy">
       <div class="trust-pill">
-        <span class="trust-avatars" aria-hidden="true">{hero.trust.avatars.map((avatar) => <i style={`background-image: url("${avatar}")`}></i>)}</span>
         <span>{hero.trust.text}</span>
       </div>
       <h1 id="hero-title" data-hero-headline>{hero.title.map((part) => part.highlighted ? <em>{part.text}</em> : part.text)}</h1>
       <p class="hero-lead" data-hero-description>{hero.description}</p>
       <div class="hero-actions">
-        <a class="button button-primary button-large" href={contact.whatsappUrl} target="_blank" rel="noreferrer">
+        <a class="button button-primary button-large" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>
           <WhatsAppIcon />
           {hero.primaryCtaLabel}
         </a>

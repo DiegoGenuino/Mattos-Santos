@@ -33,7 +33,11 @@ const aboutSrcset = about.image.srcset.map(({ src, width }) => `${src} ${width}w
     </figure>
 
     <div class="about-copy" data-reveal>
-      <p class="section-kicker spotlight-text">{about.eyebrow}</p>
+      <p class="section-kicker">{about.eyebrow}</p>
+      <header class="professional-heading">
+        <h2>{identity.professionalName || 'A experiência por trás de cada orientação.'}</h2>
+        <p>{identity.professionalRole} <span aria-hidden="true">·</span> {identity.registration}</p>
+      </header>
       <p class="about-bio" data-scroll-text>
         <span class="sr-only">{bioText}</span>
         {bioWords.map((word, index) => (

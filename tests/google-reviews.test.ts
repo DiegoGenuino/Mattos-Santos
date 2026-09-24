@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { siteConfig } from '../src/config/site';
+import type { ReviewsSectionConfig } from '../src/config/site';
 import { resolveReviews } from '../src/services/google-reviews';
 
-const createSection = () => structuredClone(siteConfig.reviewsSection);
+const createSection = (): ReviewsSectionConfig => structuredClone(siteConfig.reviewsSection);
 
-test('usa o fallback manual quando a chave da API não foi configurada', async () => {
+test('oculta avaliações quando a chave da API e o conteúdo manual não estão disponíveis', async () => {
   const section = createSection();
   section.google.placeId = 'ChIJ-place-id';
 
@@ -20,14 +21,21 @@ test('usa o fallback manual quando a chave da API não foi configurada', async (
 
   assert.equal(requested, false);
   assert.equal(result.hasGoogleReviews, false);
-  assert.equal(result.items.length, 3);
-  assert.ok(result.items.every(({ source }) => source === 'manual'));
+  assert.equal(result.items.length, 0);
 });
 
 test('normaliza avaliações do Google e completa a grade com fallback manual', async () => {
   const section = createSection();
   section.google.placeId = 'ChIJ-place-id';
   section.google.limit = 3;
+  section.manualItems = [{
+    quote: 'Atendimento cuidadoso.',
+    name: 'Cliente verificado',
+    details: 'Avaliação autorizada',
+    rating: 5,
+    avatar: '/images/google-icon.png',
+    avatarPosition: 'center',
+  }];
 
   const result = await resolveReviews(section, {
     apiKey: 'test-key',
@@ -75,7 +83,7 @@ test('normaliza avaliações do Google e completa a grade com fallback manual', 
   assert.equal(result.items[2].source, 'manual');
 });
 
-test('mantém o site publicável quando o Google Places falha', async () => {
+test('mantém o site publicável sem exibir placeholders quando o Google Places falha', async () => {
   const section = createSection();
   section.google.placeId = 'ChIJ-place-id';
   const warnings: string[] = [];
@@ -87,6 +95,6 @@ test('mantém o site publicável quando o Google Places falha', async () => {
   });
 
   assert.equal(result.hasGoogleReviews, false);
-  assert.ok(result.items.every(({ source }) => source === 'manual'));
+  assert.equal(result.items.length, 0);
   assert.match(warnings[0], /HTTP 503/);
 });

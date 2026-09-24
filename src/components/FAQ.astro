@@ -9,9 +9,9 @@ const { contact, faqSection: section } = siteConfig;
   <div class="container faq-grid">
     <div class="faq-intro" data-reveal>
       <p class="section-kicker">{section.eyebrow}</p>
-      <h2 class="spotlight-text">{section.title} <span>{section.highlightedTitle}</span></h2>
-      <p class="spotlight-text">{section.description}</p>
-      <a class="arrow-link" href={contact.whatsappUrl} target="_blank" rel="noreferrer"><ArrowUpRightIcon /> {section.ctaLabel}</a>
+      <h2>{section.title} <span>{section.highlightedTitle}</span></h2>
+      <p>{section.description}</p>
+      <a class="arrow-link" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher><ArrowUpRightIcon /> {section.ctaLabel}</a>
     </div>
 
     <div class="faq-list" data-faq-list>

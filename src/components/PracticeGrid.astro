@@ -31,20 +31,22 @@ const tabletPositions = createGridPositions(section.items.length, 2);
 <section class="section practices" id={section.id}>
   <div class="container">
     <div class="section-heading" data-reveal>
-      <h2 class="spotlight-text">{section.title}<br />com <span>{section.highlightedTitle}</span></h2>
-      <p class="spotlight-text">{section.description}</p>
+      <h2>{section.title}<br aria-hidden="true" /> <span>{section.highlightedTitle}</span></h2>
+      <p>{section.description}</p>
     </div>
     <div class="practice-grid" data-card-count={section.items.length}>
-      {section.items.map(({ icon, title, description }, index) => (
-        <article
+      {section.items.map(({ icon, title, description, href }, index) => (
+        <a
           class="practice-card"
+          href={href}
           data-reveal
           style={`--practice-start:${desktopPositions[index].start};--practice-span:${desktopPositions[index].span};--practice-tablet-start:${tabletPositions[index].start};--practice-tablet-span:${tabletPositions[index].span}`}
         >
           <span class="practice-icon" aria-hidden="true"><Icon name={icon} /></span>
-          <h3 class="spotlight-text">{title}</h3>
+          <h3>{title}</h3>
           <p>{description}</p>
-        </article>
+          <span class="practice-link">Conhecer esta atuação <Icon name="lucide:arrow-up-right" aria-hidden="true" /></span>
+        </a>
       ))}
     </div>
   </div>
