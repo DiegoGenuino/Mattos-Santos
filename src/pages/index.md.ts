@@ -56,7 +56,9 @@ O atendimento pode ocorrer presencialmente ou de forma 100% digital, e mensagens
 
 ## Localização
 
-${locationSection.address}. Para atendimento presencial, é necessário entrar em contato previamente para confirmar o horário.
+${locationSection.locations.map(({ label, address }) => `- **${label}:** ${address}`).join('\n')}
+
+Para atendimento presencial, é necessário entrar em contato previamente para confirmar o horário.
 
 ## Perguntas frequentes
 

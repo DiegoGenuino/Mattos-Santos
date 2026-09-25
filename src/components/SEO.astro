@@ -68,13 +68,13 @@ const structuredData: Record<string, unknown>[] = [
     knowsAbout: seo.knowsAbout,
     telephone: contact.whatsappNumbers.map(({ label }) => label),
     email: contact.email,
-    address: {
+    address: location.locations.map(({ address }) => ({
       '@type': 'PostalAddress',
-      streetAddress: location.address,
+      streetAddress: address,
       addressLocality: 'São Paulo',
       addressRegion: 'SP',
       addressCountry: 'BR',
-    },
+    })),
   },
   {
     '@context': 'https://schema.org',

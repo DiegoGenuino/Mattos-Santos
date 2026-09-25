@@ -9,15 +9,19 @@ const {
   title,
   highlightedTitle,
   description,
-  address,
-  mapQuery,
-  mapTitle,
   directionsLabel,
+  locations,
 } = Astro.props;
 
-const encodedLocation = encodeURIComponent(mapQuery.trim() || address);
-const embedUrl = `https://www.google.com/maps?q=${encodedLocation}&output=embed`;
-const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`;
+const resolvedLocations = locations.map((location) => {
+  const encodedLocation = encodeURIComponent(location.mapQuery.trim() || location.address);
+
+  return {
+    ...location,
+    embedUrl: `https://www.google.com/maps?q=${encodedLocation}&output=embed`,
+    directionsUrl: `https://www.google.com/maps/search/?api=1&query=${encodedLocation}`,
+  };
+});
 ---
 
 <section class="section location-section" id="localizacao" aria-labelledby="location-title">
@@ -27,29 +31,39 @@ const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encoded
       <h2 id="location-title">{title}<br aria-hidden="true" /> <span>{highlightedTitle}</span></h2>
       <p>{description}</p>
 
-      <address class="location-address">
-        <Icon name="lucide:map-pin" aria-hidden="true" />
-        <span>{address}</span>
-      </address>
-
-      <a class="location-link" href={directionsUrl} target="_blank" rel="noreferrer">
-        {directionsLabel}
-        <Icon name="lucide:external-link" aria-hidden="true" />
-      </a>
+      <div class="location-list">
+        {resolvedLocations.map((location) => (
+          <article class="location-item">
+            <span class="location-label">{location.label}</span>
+            <address class="location-address">
+              <Icon name="lucide:map-pin" aria-hidden="true" />
+              <span>{location.address}</span>
+            </address>
+            <a class="location-link" href={location.directionsUrl} target="_blank" rel="noreferrer">
+              {directionsLabel}
+              <Icon name="lucide:external-link" aria-hidden="true" />
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
 
-    <div class="location-map" data-reveal>
-      <iframe
-        src={embedUrl}
-        title={mapTitle}
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-      ></iframe>
-      <a class="location-map-action" href={directionsUrl} target="_blank" rel="noreferrer">
-        <span><Icon name="lucide:map-pin" aria-hidden="true" /> {address}</span>
-        <strong>{directionsLabel} <Icon name="lucide:external-link" aria-hidden="true" /></strong>
-      </a>
+    <div class="location-maps">
+      {resolvedLocations.map((location) => (
+        <div class="location-map" data-reveal>
+          <iframe
+            src={location.embedUrl}
+            title={location.mapTitle}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <a class="location-map-action" href={location.directionsUrl} target="_blank" rel="noreferrer">
+            <span><Icon name="lucide:map-pin" aria-hidden="true" /> {location.label}</span>
+            <strong>{directionsLabel} <Icon name="lucide:external-link" aria-hidden="true" /></strong>
+          </a>
+        </div>
+      ))}
     </div>
   </div>
 </section>

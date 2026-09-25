@@ -237,10 +237,13 @@ export interface LocationSectionConfig {
   title: string;
   highlightedTitle: string;
   description: string;
-  address: string;
-  mapQuery: string;
-  mapTitle: string;
   directionsLabel: string;
+  locations: Array<{
+    label: string;
+    address: string;
+    mapQuery: string;
+    mapTitle: string;
+  }>;
 }
 
 export interface AiDiscoveryConfig {
@@ -336,6 +339,12 @@ export const siteConfig = {
         label: '(11) 95193-3580',
         url: 'https://wa.me/5511951933580',
         channelName: 'Canal 2',
+        defaultMessage: 'Olá! Gostaria de conversar sobre o meu caso.',
+      },
+      {
+        label: '(11) 99547-7604',
+        url: 'https://wa.me/5511995477604',
+        channelName: 'Canal 3',
         defaultMessage: 'Olá! Gostaria de conversar sobre o meu caso.',
       },
     ],
@@ -436,7 +445,7 @@ export const siteConfig = {
     items: [
       { storyLabel: 'Quando surgir a urgência', title: 'Contato 24 horas', description: 'Você pode enviar sua mensagem pelo WhatsApp a qualquer hora, inclusive fora do horário comercial. O retorno é organizado conforme a disponibilidade do atendimento.' },
       { storyLabel: 'De onde você estiver', title: 'Atendimento 100% digital', description: 'Você pode receber orientação e enviar documentos com praticidade, onde estiver.' },
-      { storyLabel: 'Para conversar de perto', title: 'Atendimento presencial', description: 'Atendimento presencial na Rua São Paulo, 526, loja 06, mediante contato prévio.' },
+      { storyLabel: 'Para conversar de perto', title: 'Atendimento presencial', description: 'Atendimento presencial nas unidades Liberdade e Vila Mariana, mediante contato prévio.' },
       { storyLabel: 'Em cada decisão', title: 'Cuidado em cada caso', description: 'Mais de 20 anos de experiência aliados a uma escuta atenta e a uma orientação individualizada.' },
     ],
   },
@@ -542,12 +551,12 @@ export const siteConfig = {
     description: 'Cada situação exige análise individual. Estas respostas ajudam a orientar os primeiros passos.',
     ctaLabel: 'Falar com o escritório',
     items: [
-      { question: 'Onde fica o escritório?', answer: 'O atendimento presencial acontece na Rua São Paulo, 526, loja 06, na Liberdade, em São Paulo/SP. Entre em contato antes da visita.' },
+      { question: 'Onde ficam os escritórios?', answer: 'O atendimento presencial acontece na Rua São Paulo, 526, loja 06, na Liberdade, e na Rua Santa Cruz, 657, na Vila Mariana, ao lado do INSS, em São Paulo/SP. Entre em contato antes da visita.' },
       { question: 'Acidente fora do trabalho também pode gerar benefício?', answer: 'Pode. Um acidente de qualquer natureza pode dar origem a benefício por incapacidade e, em algumas situações, ao auxílio-acidente. O direito depende da qualidade e da categoria do segurado, das consequências do acidente e da documentação do caso.' },
       { question: 'Qual é a diferença entre auxílio por incapacidade e auxílio-acidente?', answer: 'O auxílio por incapacidade temporária protege quem está temporariamente sem condições de exercer o trabalho ou a atividade habitual. O auxílio-acidente tem natureza indenizatória e pode ser devido quando uma sequela permanente reduz a capacidade para o trabalho, conforme análise do caso.' },
       { question: 'Quais documentos ajudam na análise de uma aposentadoria?', answer: 'Em geral, documento de identidade, CPF, Carteira de Trabalho, extrato CNIS, carnês ou guias de contribuição e documentos de atividade especial ou rural. A lista exata depende do histórico de cada pessoa.' },
       { question: 'É preciso ter contribuído para receber o BPC/LOAS?', answer: 'Não. O BPC é um benefício assistencial, não uma aposentadoria. A pessoa idosa ou com deficiência deve atender aos critérios legais, incluindo a análise da situação de baixa renda e a inscrição atualizada no CadÚnico.' },
-      { question: 'Como entrar em contato?', answer: 'Fale pelo WhatsApp nos números (11) 93948-2042 ou (11) 95193-3580. Se preferir, envie um e-mail para mattosesantosassessoria@gmail.com.' },
+      { question: 'Como entrar em contato?', answer: 'Fale pelo WhatsApp nos números (11) 93948-2042, (11) 95193-3580 ou (11) 99547-7604. Se preferir, envie um e-mail para mattosesantosassessoria@gmail.com.' },
       { question: 'O atendimento funciona fora do horário comercial?', answer: 'Você pode enviar sua mensagem pelo WhatsApp a qualquer hora, inclusive fora do horário comercial. O retorno é organizado conforme a disponibilidade do atendimento.' },
     ],
   },
@@ -594,7 +603,7 @@ export const siteConfig = {
     themeColor: '#123E43',
     favicon: '/favicon.svg',
     keywords: ['Mattos e Santos Assessoria', 'assessoria previdenciária', 'benefício por acidente', 'acidente de trabalho', 'auxílio-acidente', 'auxílio por incapacidade temporária', 'aposentadoria INSS', 'BPC LOAS idoso', 'BPC pessoa com deficiência'],
-    areaServed: 'Liberdade, São Paulo - SP e Região Metropolitana',
+    areaServed: 'Liberdade e Vila Mariana, São Paulo - SP, além da Região Metropolitana',
     knowsAbout: ['Benefícios por acidente', 'Acidente de trabalho', 'Auxílio-acidente', 'Auxílio por incapacidade temporária', 'Aposentadorias do INSS', 'Planejamento previdenciário', 'BPC/LOAS para pessoa idosa', 'BPC/LOAS para pessoa com deficiência'],
     sitemap: [
       { path: '/', changeFrequency: 'monthly', priority: 1 },
@@ -620,16 +629,27 @@ export const siteConfig = {
     caption: 'Vídeo institucional',
   },
   locationSection: {
-    // Substitua address e mapQuery pelo endereço completo de cada novo projeto.
+    // Substitua as unidades e consultas de mapa pelo endereço completo de cada novo projeto.
     enabled: true,
     eyebrow: 'Localização',
-    title: 'Encontre nosso',
-    highlightedTitle: 'escritório.',
-    description: 'O atendimento presencial acontece mediante contato prévio. Se preferir, todo o atendimento também pode ser realizado de forma digital.',
-    address: 'Rua São Paulo, 526, loja 06 - Liberdade, São Paulo - SP',
-    mapQuery: 'Rua São Paulo, 526, loja 06 - Liberdade, São Paulo - SP',
-    mapTitle: 'Localização da Mattos & Santos em São Paulo',
+    title: 'Encontre nossos',
+    highlightedTitle: 'escritórios.',
+    description: 'O atendimento presencial acontece em duas unidades, mediante contato prévio. Se preferir, todo o atendimento também pode ser realizado de forma digital.',
     directionsLabel: 'Abrir no Google Maps',
+    locations: [
+      {
+        label: 'Liberdade',
+        address: 'Rua São Paulo, 526, loja 06 - Liberdade, São Paulo - SP',
+        mapQuery: 'Rua São Paulo, 526, loja 06 - Liberdade, São Paulo - SP',
+        mapTitle: 'Unidade Mattos & Santos na Liberdade, em São Paulo',
+      },
+      {
+        label: 'Vila Mariana',
+        address: 'Rua Santa Cruz, 657 - Vila Mariana, São Paulo - SP — ao lado do INSS',
+        mapQuery: 'Rua Santa Cruz, 657 - Vila Mariana, São Paulo - SP',
+        mapTitle: 'Unidade Mattos & Santos na Vila Mariana, ao lado do INSS',
+      },
+    ],
   },
   aiDiscovery: {
     // Desative apenas se este projeto não puder ser descoberto por agentes.
