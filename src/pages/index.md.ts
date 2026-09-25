@@ -38,7 +38,7 @@ A ${identity.legalName} atua em ${seo.areaServed}, com atendimento técnico, pes
 
 ${identity.professionalDescription}
 
-## Áreas de atuação
+## Como podemos ajudar
 
 ${areas}
 

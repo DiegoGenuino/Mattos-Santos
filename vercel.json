@@ -1,4 +1,9 @@
 {
+  "redirects": [
+    { "source": "/atuacao/direito-previdenciario/", "destination": "/", "permanent": true },
+    { "source": "/atuacao/direito-trabalhista/", "destination": "/atuacao/beneficios-por-acidente/", "permanent": true },
+    { "source": "/atuacao/direito-civil/", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/_astro/(.*)",

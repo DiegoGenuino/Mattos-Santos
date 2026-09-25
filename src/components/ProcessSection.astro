@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+import WhatsAppIcon from '@/components/WhatsAppIcon.astro';
 import { siteConfig } from '@/config/site';
 
 const { contact, processSection: section } = siteConfig;
@@ -7,22 +9,66 @@ const { contact, processSection: section } = siteConfig;
 <section class="section process-section" id={section.id} aria-labelledby="process-title">
   <div class="container process-shell">
     <header class="process-heading" data-reveal>
-      <h2 id="process-title">{section.title}<br aria-hidden="true" /> <span>{section.highlightedTitle}</span></h2>
-      <div>
-        <p>{section.description}</p>
-        <a class="arrow-link" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>
-          {section.ctaLabel}
-        </a>
-      </div>
+      <h2 id="process-title">{section.title} <span>{section.highlightedTitle}</span></h2>
+      <p class="process-lead">{section.description}</p>
     </header>
 
-    <ol class="process-steps" data-reveal>
+    <ol class="process-cards" data-reveal>
       {section.steps.map((step) => (
-        <li>
-          <h3>{step.title}</h3>
+        <li class:list={['process-card', { 'process-card-featured': step.visual === 'documents' }]}>
+          <div class="process-card-heading">
+            <h3>{step.title}</h3>
+          </div>
           <p class="process-description">{step.description}</p>
+
+          {step.visual === 'contact' && (
+            <div class="process-visual process-contact-visual" aria-hidden="true">
+              <div class="contact-window">
+                <div class="contact-window-head">
+                  <span class="contact-avatar"><WhatsAppIcon /></span>
+                  <span><b>Atendimento</b><small>online agora</small></span>
+                  <i></i>
+                </div>
+                <div class="contact-messages">
+                  <span>Olá! Como podemos ajudar?</span>
+                  <span>Quero entender meu caso.</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {step.visual === 'documents' && (
+            <div class="process-visual process-documents-visual" aria-hidden="true">
+              <span class="document-sheet document-sheet-back"></span>
+              <span class="document-sheet document-sheet-middle"></span>
+              <div class="document-sheet document-sheet-front">
+                <div class="document-sheet-head"><Icon name="lucide:file-text" /><span></span></div>
+                <ul>
+                  <li><Icon name="lucide:check" /><span>Documento pessoal</span></li>
+                  <li><Icon name="lucide:check" /><span>CNIS ou atestados</span></li>
+                  <li><Icon name="lucide:check" /><span>Datas importantes</span></li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {step.visual === 'guidance' && (
+            <div class="process-visual process-guidance-visual" aria-hidden="true">
+              <div class="guidance-result">
+                <span><Icon name="lucide:badge-check" /></span>
+                <div><small>Próximos passos</small><strong>Orientação definida</strong></div>
+              </div>
+            </div>
+          )}
         </li>
       ))}
     </ol>
+
+    <div class="process-action" data-reveal>
+      <a class="button button-primary button-large" href={contact.whatsappUrl} target="_blank" rel="noreferrer" data-whatsapp-launcher>
+        <WhatsAppIcon />
+        {section.ctaLabel}
+      </a>
+    </div>
   </div>
 </section>

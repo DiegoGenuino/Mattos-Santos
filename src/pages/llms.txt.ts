@@ -19,14 +19,14 @@ Idioma principal: português do Brasil. Área de atendimento: ${seo.areaServed}.
 
 ## Conteúdo principal
 
-- [Visão geral institucional](${siteUrl}${aiDiscovery.markdownPath}): Conteúdo limpo sobre o escritório, profissional responsável, áreas de atuação, atendimento, localização e dúvidas frequentes.
+- [Visão geral institucional](${siteUrl}${aiDiscovery.markdownPath}): Conteúdo sobre o escritório, profissional responsável, benefícios após acidentes, aposentadorias, BPC/LOAS, atendimento, localização e dúvidas frequentes.
 
 ## Navegação
 
 - [Site oficial](${siteUrl}/): Página institucional completa da ${identity.siteName}.
-- [Áreas de atuação](${siteUrl}/#especialidades): Direito Previdenciário, Direito Trabalhista e Direito Civil.
+- [Como podemos ajudar](${siteUrl}/#especialidades): Benefícios após acidentes, aposentadorias e BPC/LOAS para pessoa idosa ou pessoa com deficiência.
 - [Sobre a especialista](${siteUrl}/#sobre): Mais de 20 anos de atuação e pós-graduação em Direito Previdenciário.
-- [Dúvidas frequentes](${siteUrl}/#faq): Respostas institucionais sobre atendimento e sigilo.
+- [Dúvidas frequentes](${siteUrl}/#faq): Respostas informativas sobre benefícios e atendimento.
 - [Localização](${siteUrl}/#localizacao): Região de atendimento presencial e acesso ao mapa.
 
 ## Optional
